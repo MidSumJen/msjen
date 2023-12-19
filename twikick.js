@@ -189,7 +189,7 @@ async function main(copy_L = true, open_L = true) {
         catch {await navigator.clipboard.writeText(link)}
       }
       if (open_L) open(link);
-    } else {
+    } else 
       try {
         const res7 = await fetch(`https://kick.com/api/v1/channels/${location.pathname.split('/')[1]}`, {'headers': {
           'authorization': `Bearer ${cookie}`,
