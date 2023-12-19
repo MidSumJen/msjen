@@ -6,19 +6,6 @@ function copyToClipboard(val) {
   document.execCommand('copy');
   document.body.removeChild(t);
 }
-function getCookie(cookieName) {
-  cookieName = `${cookieName}=`;
-  let cookieData = document.cookie;
-  let cookieValue = '';
-  let start = cookieData.indexOf(cookieName);
-  if (start !== -1) {
-    start += cookieName.length;
-    let end = cookieData.indexOf(';', start);
-    if (end === -1) end = cookieData.length;
-    cookieValue = cookieData.substring(start, end);
-  }
-  return decodeURIComponent(cookieValue);
-}
 function makem3u8_vod(vod_id, streams_id, started_at, username, extra = 0) {
   return new Promise(async resolve => {
     const res = await fetch(`https://cors.taedin.live/https://vod.nxwqwer.com/${vod_id}`);
