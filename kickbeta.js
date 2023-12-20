@@ -134,6 +134,7 @@ async function main(copy_L = true, open_L = true) {
         console.log(`API 불러오기 실패 \n${error}`);
         return;
       }
+
       if (!streams_id) {
         alert(`${username}은 방송 중이 아닙니다.`);
         console.log(`${username}은 방송 중이 아닙니다.`);
@@ -201,8 +202,7 @@ async function main(copy_L = true, open_L = true) {
         catch {await navigator.clipboard.writeText(link)}
       }
       if (open_L) open(link);
-    } 
-      }else{
+    } else {
       try {
         const res7 = await fetch(`https://kick.com/api/v1/channels/${location.pathname.split('/')[1]}`, {'headers': {
           'authorization': `Bearer ${cookie}`,
