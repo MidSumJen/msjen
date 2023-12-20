@@ -32,15 +32,15 @@ function makem3u8_vod(vod_id, streams_id, started_at, username, extra = 0) {
 async function makem3u8(streams_id, started_at, username, extra = 0) {
   const unix = Math.floor(new Date(started_at).getTime() / 1000) - extra;
   const keys = [0, 1, -1].map(adjust => [username, streams_id, unix + adjust].join('_'));
-  const serials = await Promise.all(keys.map(async key => [[...new Uint8Array(await crypto.subtle.digest('SHA-1',new TextEncoder().encode(key)))].map(x=>x.toString(16).padStart(2,'0')).join('').substring(0,20), key].join('_')));
+  const serials = await Promise.all(keys.map(async key => [[...new Uint8Array(await crypto.subtle.digest('SHA-1',new TextEncoder().encode(key)))].map(x=>x.toString(16).padStart(2,'0')).join("").substring(0,20), key].join('_')));
   const servers = ['d1mhjrowxxagfy.cloudfront.net', 'd3vd9lfkzbru3h.cloudfront.net', 'd1m7jfoe9zdc1j.cloudfront.net', 'd2nvs31859zcd8.cloudfront.net', 'dgeft87wbj63p.cloudfront.net'];
   const slugs = ['index-dvr.m3u8', '1.ts', '100.ts'];
-  const res = await fetch(`https://cors.taedin.live/https://d3vd9lfkzbru3h.cloudfront.net/${serials[0]}/chunked/index-dvr.m3u8`, {method: 'HEAD'});
+  const res = await fetch(`https://cors.taedin.live/https://d3vd9lfkzbru3h.cloudfront.net/${serials[0]}/chunked/index-dvr.m3u8`, {method: "HEAD"});
   if (res.status == 200) return `https://d3vd9lfkzbru3h.cloudfront.net/${serials[0]}/chunked/index-dvr.m3u8`;
   else {
     const m3u8s = await Promise.all(serials.map(async (serial) => await Promise.all(servers.map(async (server) => await Promise.all(slugs.map(async (slug) => {
       try {
-        const data = await fetch(`https://cors.taedin.live/https://${server}/${serial}/chunked/${slug}`, {method: 'HEAD'});
+        const data = await fetch(`https://cors.taedin.live/https://${server}/${serial}/chunked/${slug}`, {method: "HEAD"});
         if (data.status == 200) return `https://${server}/${serial}/chunked/index-dvr.m3u8`;
         else return;
       } catch (err) {}
@@ -96,7 +96,7 @@ async function main(copy_L = true, open_L = true) {
     } else {
       const username = location.pathname.split('/')[1];
       try {
-        const res1 = await fetch('https://cors.taedin.live/https://gql.twitch.tv/gql', {
+        const res1 = await fetch("https://cors.taedin.live/https://gql.twitch.tv/gql", {
           headers: {
             'client-id': 'jzkbprff40iqj646a697cyrvl0zt2m6',
           },
@@ -123,7 +123,7 @@ async function main(copy_L = true, open_L = true) {
               }
             }
           }]),
-          method: 'POST',
+          method: "POST",
         })
         const result1 = await res1.json();
         var streams_id = (result1[1]['data']['user']['stream']) ? result1[1]['data']['user']['stream']['id'] : null;
