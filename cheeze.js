@@ -238,7 +238,7 @@ async function main(copy_L = true, open_L = true) {
         console.log(`치지직 API 불러오기 실패 \n${error}`);
       }
       try {
-        const res9 = await fetch(`https://apis.naver.com/neonplayer/vodplay/v1/playback/${content['videoId']}?key=${content[''inKey'']}`, {'headers': {
+        const res9 = await fetch(`https://apis.naver.com/neonplayer/vodplay/v1/playback/${content['videoId']}?key=${content['inKey']}`, {'headers': {
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Whale/3.23.214.17 Safari/537.36',
         },
         'method': 'GET',
@@ -273,5 +273,6 @@ async function main(copy_L = true, open_L = true) {
         catch {await navigator.clipboard.writeText(link)}
       }
       if (open_L) open(link);
-    } else alert('주소가 잘못되었습니다. \n지원되는 주소는 twitch.tv, streamscharts.com, twitchtracker.com, kick.com, chzzk.naver.com 입니다.');
+    }
+   } else alert('주소가 잘못되었습니다. \n지원되는 주소는 twitch.tv, streamscharts.com, twitchtracker.com, kick.com, chzzk.naver.com 입니다.');
 }
